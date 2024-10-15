@@ -1,5 +1,11 @@
 # svelte
 
+## 5.0.0-next.266
+
+### Patch Changes
+
+- breaking: scope `:has(...)` selectors ([#13567](https://github.com/sveltejs/svelte/pull/13567))
+
 ## 5.0.0-next.265
 
 ### Patch Changes
