@@ -23,14 +23,14 @@ All three sections — script, styles and markup — are optional.
 ## `<script>`
 
 A `<script>` block contains JavaScript that runs when a component instance is created. Variables declared (or imported) at the top level are 'visible' from the component's markup. There are four additional rules:
-<script> 블록은 컴포넌트의 인스턴스가 생성될 때 실행되는 자바스크립트 코드를 포함한다. 최상위 레벨에서 선언된(혹은 import된) 변수들은 해당 컴포넌트의 markup 부분에서 참조가 가능하다. 여기에 4개지의 추가적인 규칙이 적용된다.
+<script> 블록은 컴포넌트의 인스턴스가 생성될 때 실행되는 자바스크립트 코드를 포함한다. 최상위 레벨에서 선언된(혹은 import된) 변수들은 해당 컴포넌트의 markup 부분에서 참조가 가능하다. 여기에 4개의 추가적인 규칙이 적용된다.
 
-### 1. `export` creates a component prop
 ### 1. 'export' 명령어는 해당 컴포넌트의 prop(프로퍼티)를 성성한다.
 	
 Svelte uses the `export` keyword to mark a variable declaration as a _property_ or _prop_, which means it becomes accessible to consumers of the component (see the section on  for more information).
 
-변수를 선언할 때 'export' 명령어를 주면, 스벨트는 그 해당 변수를 _property_, 또는 _prop_ 으로 등록한다. 이는 해당 컴포넌트를 사용하는 앱의 다른 부분에서 그 변수에 접근할 수 있게 된다는 뜻이다.(자세한 내용은 [attributes and props](/docs/basic-markup#attributes-and-props) 를 참조할 것.)
+변수를 선언할 때 'export' 명령어를 주면, 스벨트는 그 해당 변수를 _property_, 또는 _prop_ 으로 등록한다. 이는 해당 컴포넌트를 사용하는 앱의 다른 부분에서 그 변수에 접근할 수 있게 된다는 뜻이다. (자세한 내용은 [attributes and props](/docs/basic-markup#attributes-and-props) 를 참조할 것)
+
 
 ```svelte
 <script>
@@ -42,9 +42,13 @@ Svelte uses the `export` keyword to mark a variable declaration as a _property_ 
 </script>
 ```
 
-You can specify a default initial value for a prop. It will be used if the component's consumer doesn't specify the prop on the component (or if its initial value is `undefined`) when instantiating the component. Note that if the values of props are subsequently updated, then any prop whose value is not specified will be set to `undefined` (rather than its initial value).
 
-In development mode (see the [compiler options](/docs/svelte-compiler#compile)), a warning will be printed if no default initial value is provided and the consumer does not specify a value. To squelch this warning, ensure that a default initial value is specified, even if it is `undefined`.
+You can specify a default initial value for a prop. It will be used if the component's consumer doesn't specify the prop on the component (or if its initial value is `undefined`) when instantiating the component. Note that if the values of props are subsequently updated, then any prop whose value is not specified will be set to `undefined` (rather than its initial value).
+prop에는 초기값을 명시해 줄 수 있습니다. 이 기본값은 해당 컴포넌트의 인스턴트가 생성될 때, 컴포넌트를 사용하는 부분이 prop의 값을 전달하지 않을 경우(혹은 undefined일 경우)에 사용됩니다. 여기서 하나 알고 있어야 할 점은, prop에 저장된 값들이 추후에 업데이트될 경우, 값이 명시되지 않은 prop들의 값은 (초기값이 아니라) undefined로 초기화됩니다.
+
+In development mode (see the ), a warning will be printed if no default initial value is provided and the consumer does not specify a value. To squelch this warning, ensure that a default initial value is specified, even if it is `undefined`.
+
+개발 모드에서는([compiler options](/docs/svelte-compiler#compile) 참고), 만일 초기값도 없는데, 컴포넌트 사용시에도 값을 할당해 주지 않았다면, 경고가 표시됩니다.
 
 ```svelte
 <script>
@@ -89,9 +93,9 @@ You can use reserved words as prop names.
 
 ### 2. Assignments are 'reactive'
 
-To change component state and trigger a re-render, just assign to a locally declared variable.
+컴포넌트의 상태를 바꾸고 페이지 리렌더링을 개시시키려면, 단지 지역 선언 변수에 값을 할당해 주기만 하면 됩니다.
 
-Update expressions (`count += 1`) and property assignments (`obj.x = y`) have the same effect.
+갱신 명령어('count +=1')과 프로퍼티 할당('obj.x = y')는 동일한 효과를 나타냅니다.
 
 ```svelte
 <script>
@@ -105,7 +109,7 @@ Update expressions (`count += 1`) and property assignments (`obj.x = y`) have th
 </script>
 ```
 
-Because Svelte's reactivity is based on assignments, using array methods like `.push()` and `.splice()` won't automatically trigger updates. A subsequent assignment is required to trigger the update. This and more details can also be found in the [tutorial](https://learn.svelte.dev/tutorial/updating-arrays-and-objects).
+스벨트의 반응성은 할당에 기반하기 때문에, .push() 나 '.splice()'같은 배열 메소드를 사용해서는 업데이트 처리가 되지 않습니다. 그래서 업데이트 처리를 개시시키기 위해서는 추후 할당 처리를 해 줘야 합니다. 여기에 대한 내용, 또 더 자세한 내용은 [tutorial](https://learn.svelte.dev/tutorial/updating-arrays-and-objects)를 참조하시기 바랍니다.
 
 ```svelte
 <script>
@@ -134,7 +138,7 @@ Svelte's `<script>` blocks are run only when the component is created, so assign
 
 ### 3. `$:` marks a statement as reactive
 
-Any top-level statement (i.e. not inside a block or a function) can be made reactive by prefixing it with the `$:` [JS label syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label). Reactive statements run after other script code and before the component markup is rendered, whenever the values that they depend on have changed.
+최상위 명령구문(블록이나 함수 블록 안에 있지 않은 명령 구문)은, 그 앞에 '$'를 붙여서 반응하게 만들 수 있습니다. [JS label syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label). 반응성 구문들은, 그 그문에서 참조하는 변수의 값이 변할 때 마다, 다른 스크립트 코드들이 실행된 후, 컴포넌트의 마크업들이 렌더링되기 전에 실행됩니다.
 
 ```svelte
 <script>
