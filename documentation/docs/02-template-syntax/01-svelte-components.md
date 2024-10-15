@@ -22,14 +22,13 @@ All three sections — script, styles and markup — are optional.
 
 ## `<script>`
 
-A `<script>` block contains JavaScript that runs when a component instance is created. Variables declared (or imported) at the top level are 'visible' from the component's markup. There are four additional rules:
-<script> 블록은 컴포넌트의 인스턴스가 생성될 때 실행되는 자바스크립트 코드를 포함한다. 최상위 레벨에서 선언된(혹은 import된) 변수들은 해당 컴포넌트의 markup 부분에서 참조가 가능하다. 여기에 4개의 추가적인 규칙이 적용된다.
+`<script>` 블록은 컴포넌트의 인스턴스가 생성될 때 실행되는 자바스크립트 코드를 포함한다. 최상위 레벨에서 선언된(혹은 import된) 변수들은 해당 컴포넌트의 markup 부분에서 참조가 가능하다. 여기에 4개의 추가적인 규칙이 적용된다.
 
 ### 1. 'export' 명령어는 해당 컴포넌트의 prop(프로퍼티)를 성성한다.
 	
 Svelte uses the `export` keyword to mark a variable declaration as a _property_ or _prop_, which means it becomes accessible to consumers of the component (see the section on  for more information).
 
-변수를 선언할 때 'export' 명령어를 주면, 스벨트는 그 해당 변수를 _property_, 또는 _prop_ 으로 등록한다. 이는 해당 컴포넌트를 사용하는 앱의 다른 부분에서 그 변수에 접근할 수 있게 된다는 뜻이다. (자세한 내용은 [attributes and props](/docs/basic-markup#attributes-and-props) 를 참조할 것)
+변수를 선언할 때 'export' 명령어를 주면, 스벨트는 그 해당 변수를 _property_, 또는 _prop_ 으로 등록합니다. 이는 해당 컴포넌트를 사용하는 앱의 다른 부분에서 그 변수에 접근할 수 있게 된다는 뜻입니다. (자세한 내용은 [attributes and props](/docs/basic-markup#attributes-and-props) 를 참조할 것)
 
 
 ```svelte
@@ -46,9 +45,7 @@ Svelte uses the `export` keyword to mark a variable declaration as a _property_ 
 You can specify a default initial value for a prop. It will be used if the component's consumer doesn't specify the prop on the component (or if its initial value is `undefined`) when instantiating the component. Note that if the values of props are subsequently updated, then any prop whose value is not specified will be set to `undefined` (rather than its initial value).
 prop에는 초기값을 명시해 줄 수 있습니다. 이 기본값은 해당 컴포넌트의 인스턴트가 생성될 때, 컴포넌트를 사용하는 부분이 prop의 값을 전달하지 않을 경우(혹은 undefined일 경우)에 사용됩니다. 여기서 하나 알고 있어야 할 점은, prop에 저장된 값들이 추후에 업데이트될 경우, 값이 명시되지 않은 prop들의 값은 (초기값이 아니라) undefined로 초기화됩니다.
 
-In development mode (see the ), a warning will be printed if no default initial value is provided and the consumer does not specify a value. To squelch this warning, ensure that a default initial value is specified, even if it is `undefined`.
-
-개발 모드에서는([compiler options](/docs/svelte-compiler#compile) 참고), 만일 초기값도 없는데, 컴포넌트 사용시에도 값을 할당해 주지 않았다면, 경고가 표시됩니다.
+개발 모드에서는([compiler options](/docs/svelte-compiler#compile) 참고), 만일 초기값도 없는데, 컴포넌트 사용시에도 값을 할당해 주지 않았다면, 경고가 표시됩니다. 이 경고를 피하기 위해서는, 기본 초기값을 'undefined'로라도 명시해 주도록 합니다.
 
 ```svelte
 <script>
@@ -57,7 +54,7 @@ In development mode (see the ), a warning will be printed if no default initial 
 </script>
 ```
 
-If you export a `const`, `class` or `function`, it is readonly from outside the component. Functions are valid prop values, however, as shown below.
+`const`, `class`, `function`을 export 한다면, 컴포넌트 밖에서 이 값들은 읽기 전용 값들이 됩니다. 아래서 보듯이 prop 값으로 함수를 지정하는 것도 유효한 문법입니다.
 
 ```svelte
 <!--- file: App.svelte --->
@@ -75,7 +72,8 @@ If you export a `const`, `class` or `function`, it is readonly from outside the 
 </script>
 ```
 
-Readonly props can be accessed as properties on the element, tied to the component using [`bind:this` syntax](/docs/component-directives#bind-this).
+Readonly props can be accessed as properties on the element, tied to the component using.
+읽기 전용 prop들은 [`bind:this` syntax](/docs/component-directives#bind-this)을 사용해서 컴포넌트에 묶인 요소의 프로퍼티로 접근이 가능합니다.
 
 You can use reserved words as prop names.
 
