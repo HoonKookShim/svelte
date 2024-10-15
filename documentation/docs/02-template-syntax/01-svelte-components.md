@@ -3,8 +3,10 @@ title: Svelte components
 ---
 
 Components are the building blocks of Svelte applications. They are written into `.svelte` files, using a superset of HTML.
+컴포넌트란, 스벨트 어플리케이션의 기본 구성요소(건물 지을 때 벽돌과 같은) 다. 컴포넌트는 '.svelte'파일로 작성되는데, 이 포맷은 기존 HTML을 포함하는 상위 포맷이다.
 
 All three sections — script, styles and markup — are optional.
+모두 - script, styles makrup - 세  부분으로 구성되는데,  필요한 부분만 있어도 된다.(모든 부분이 다 있어야 하는 것이 아니다.)
 
 ```svelte
 <script>
@@ -21,10 +23,14 @@ All three sections — script, styles and markup — are optional.
 ## `<script>`
 
 A `<script>` block contains JavaScript that runs when a component instance is created. Variables declared (or imported) at the top level are 'visible' from the component's markup. There are four additional rules:
+<script> 블록은 컴포넌트의 인스턴스가 생성될 때 실행되는 자바스크립트 코드를 포함한다. 최상위 레벨에서 선언된(혹은 import된) 변수들은 해당 컴포넌트의 markup 부분에서 참조가 가능하다. 여기에 4개지의 추가적인 규칙이 적용된다.
 
 ### 1. `export` creates a component prop
+### 1. 'export' 명령어는 해당 컴포넌트의 prop(프로퍼티)를 성성한다.
+	
+Svelte uses the `export` keyword to mark a variable declaration as a _property_ or _prop_, which means it becomes accessible to consumers of the component (see the section on  for more information).
 
-Svelte uses the `export` keyword to mark a variable declaration as a _property_ or _prop_, which means it becomes accessible to consumers of the component (see the section on [attributes and props](/docs/basic-markup#attributes-and-props) for more information).
+변수를 선언할 때 'export' 명령어를 주면, 스벨트는 그 해당 변수를 _property_, 또는 _prop_ 으로 등록한다. 이는 해당 컴포넌트를 사용하는 앱의 다른 부분에서 그 변수에 접근할 수 있게 된다는 뜻이다.(자세한 내용은 [attributes and props](/docs/basic-markup#attributes-and-props) 를 참조할 것.)
 
 ```svelte
 <script>
