@@ -7,14 +7,19 @@ title: Stores
 - TODO should the details for the store methods belong to the reference section?
 
 A _store_ is an object that allows reactive access to a value via a simple _store contract_. The [`svelte/store` module](../svelte-store) contains minimal store implementations which fulfil this contract.
+_스토어_ 란, 하나의 변수에 대해서 간단한 _스토어 계약_ 을 통해 반응적인 접근을 허용하는 객체다. 이 계약을 만족시키는 최소한의 스토어 함유하고 있다.
 
 Any time you have a reference to a store, you can access its value inside a component by prefixing it with the `$` character. This causes Svelte to declare the prefixed variable, subscribe to the store at component initialisation and unsubscribe when appropriate.
+스토어에 대한  참조만 자기고 있다면, 
 
 Assignments to `$`-prefixed variables require that the variable be a writable store, and will result in a call to the store's `.set` method.
 
 Note that the store must be declared at the top level of the component — not inside an `if` block or a function, for example.
+스토어 선언은 컴포넌트 최상단에 해야 한다는 것을 잊지 말자. 예를 들어 if 블럭, 혹은 함수 블럭 안에서는 스토어를 선언할 수 없다.
 
 Local variables (that do not represent store values) must _not_ have a `$` prefix.
+(스토어 값이 아닌) 지역 변수는 '$'가 붙으면 _안_ 된다.
+
 
 ```svelte
 <script>
@@ -32,8 +37,10 @@ Local variables (that do not represent store values) must _not_ have a `$` prefi
 ```
 
 ## When to use stores
+## 스토어는 언제 사용하는가
 
 Prior to Svelte 5, stores were the go-to solution for creating cross-component reactive states or extracting logic. With runes, these use cases have greatly diminished.
+Sbelte 5 버전 이전에는, 스토어는 
 
 - when extracting logic, it's better to take advantage of runes' universal reactivity: You can use runes outside the top level of components and even place them into JavaScript or TypeScript files (using a `.svelte.js` or `.svelte.ts` file ending)
 - when creating shared state, you can create a `$state` object containing the values you need and manipulating said state
