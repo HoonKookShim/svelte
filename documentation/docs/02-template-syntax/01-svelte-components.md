@@ -253,23 +253,25 @@ Local variables (that do not represent store values) must _not_ have a `$` prefi
 store = { subscribe: (subscription: (value: any) => void) => (() => void), set?: (value: any) => void }
 ```
 
-You can create your own stores without relying on [`svelte/store`](/docs/svelte-store), by implementing the _store contract_:
+스벨트가 제공하는  [`svelte/store`](/docs/svelte-store)에 의존하지 않고도, _store contract_만 적용하면 자신만의 스토어를 생성할 수 있습니다.
 
-1. A store must contain a `.subscribe` method, which must accept as its argument a subscription function. This subscription function must be immediately and synchronously called with the store's current value upon calling `.subscribe`. All of a store's active subscription functions must later be synchronously called whenever the store's value changes.
-2. The `.subscribe` method must return an unsubscribe function. Calling an unsubscribe function must stop its subscription, and its corresponding subscription function must not be called again by the store.
-3. A store may _optionally_ contain a `.set` method, which must accept as its argument a new value for the store, and which synchronously calls all of the store's active subscription functions. Such a store is called a _writable store_.
+1. 스토어는 `.subscribe` 라는 메소드를 가져야 하며, 이 메소드는 매개변수로 '구독 함수'(subscription function)를 받아야 합니다. '.subscribe'함수가 호출되면 이 '구독 함수'에 스토어의 현재 값을 주어 즉시, 그리고 동기적으로 실행되어야 합니다.This subscription function must be immediately and synchronously called with the store's current value upon calling `.subscribe`. 스토어에 등록된 '구독 함수'들 모두는 스토어의 값이 변할 때 마다 동기적으로 실행되어야 합니다.All of a store's active subscription functions must later be synchronously called whenever the store's value changes.
+2. '.subscribe' 함수는 '구독 해지 함수'(unsubscribe function)을 반환합니다. The `.subscribe` method must return an unsubscribe function. Calling an unsubscribe function must stop its subscription, and its corresponding subscription function must not be called again by the store.
+3. 스토어는, _선택적으로_ .'set' 메소드를 가질 수 있는데, 이 함수는 스토어에 저장할 새로운 값을 매개변수로 받아서 스토어에 등록된 모든 '구독 함수'들을 동기적으로 호출하는 함수입니다. 이렇게 '.set' 메소드가 있는 스토어를 _writable store_ 라고 합니다.
 
 For interoperability with RxJS Observables, the `.subscribe` method is also allowed to return an object with an `.unsubscribe` method, rather than return the unsubscription function directly. Note however that unless `.subscribe` synchronously calls the subscription (which is not required by the Observable spec), Svelte will see the value of the store as `undefined` until it does.
 
+
 ## `<script context="module">`
 
-A `<script>` tag with a `context="module"` attribute runs once when the module first evaluates, rather than for each component instance. Values declared in this block are accessible from a regular `<script>` (and the component markup) but not vice versa.
+'context="module";이 들어간 <script> 태그 안의 코드는, 컴포넌트 인스턴스가 생성될 때 매번 실행되는게 아니라, 앱 실행시 모듈이 처음 평가받을 때 한 번만 실행됩니다. 이 블럭 안에 선언된 변수들은 일반 <script> 태그 안( 그리고 markup 부분)에서 접근이 가능하지만, 반대로는 안 됩니다.
 
 You can `export` bindings from this block, and they will become exports of the compiled module.
 
-You cannot `export default`, since the default export is the component itself.
 
-> Variables defined in `module` scripts are not reactive — reassigning them will not trigger a rerender even though the variable itself will update. For values shared between multiple components, consider using a [store](/docs/svelte-store).
+컴포넌트 자체가 default export 되기 때문에, 'export default'는 쓸 수 없습니다.
+
+> 'module' script 안에서 정의된 변수들은 반응성이 없습니다. 그 변수들에 새로운 값을 할당하면 그 값은 바뀌지만 랜더링이 다시 개시되지는 않습니다. 여러개의 컴포넌트들에서 공유하는 변수들의 경우에는 [store](/docs/svelte-store)를 사용하는 것을 고려하는 것이 좋습니다.
 
 ```svelte
 <script context="module">
