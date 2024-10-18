@@ -6,17 +6,19 @@ The `svelte/store` module exports functions for creating [readable](/docs/svelte
 
 Keep in mind that you don't _have_ to use these functions to enjoy the [reactive `$store` syntax](/docs/svelte-components#script-4-prefix-stores-with-$-to-access-their-values) in your components. Any object that correctly implements `.subscribe`, unsubscribe, and (optionally) `.set` is a valid store, and will work both with the special syntax, and with Svelte's built-in [`derived` stores](/docs/svelte-store#derived).
 
+
 This makes it possible to wrap almost any other reactive state handling library for use in Svelte. Read more about the [store contract](/docs/svelte-components#script-4-prefix-stores-with-$-to-access-their-values) to see what a correct implementation looks like.
+
 
 ## `writable`
 
 > EXPORT_SNIPPET: svelte/store#writable
 
-Function that creates a store which has values that can be set from 'outside' components. It gets created as an object with additional `set` and `update` methods.
+컴포넌트 외부에서 설정할 수 있는 값들을 가지고 있는 스토어를 만드는 함수입니다. 이것은 (subscribe 이외에 추가로) 'set'메소드와 'update'메소드를 가진 스토어 객체를 생성합니다.
 
-`set` is a method that takes one argument which is the value to be set. The store value gets set to the value of the argument if the store value is not already equal to it.
+'set' 메소드는 매개변수로 스토어에 저장될 값 하나를 받습니다. 그렇게 전달받은 값이 이미 스토어에 저장된 값과 동일하지 않다면 스토어에 저장되게 됩니다.
 
-`update` is a method that takes one argument which is a callback. The callback takes the existing store value as its argument and returns the new value to be set to the store.
+'update' 메소드는 콜백 함수 하나를 매겨변수로 받습니다. 이 콜백함수는 현재 스토어에 저장된 값을 매개변수로 받고, 새로 저장될 값을 반환합니다.
 
 ```js
 /// file: store.js
