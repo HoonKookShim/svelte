@@ -34,6 +34,7 @@ count.update((n) => n + 1); // logs '2'
 ```
 
 If a function is passed as the second argument, it will be called when the number of subscribers goes from zero to one (but not from one to two, etc). That function will be passed a `set` function which changes the value of the store, and an `update` function which works like the `update` method on the store, taking a callback to calculate the store's new value from its old value. It must return a `stop` function that is called when the subscriber count goes from one to zero.
+두번째 매개변수로 함수를 전달하면, 그 함수는 구독자가 0에서 1로 될때(1에서 2로 될 때는 아니고, 즉 처음에 구독자가 생겼을 때) 호출됩니다. 그 함수는 또한 매개변수로 스토어의 값을 변경하는 'set'함수와 스토어의 update 메소드와 비슷한 일을 하는 'update'함수를 전달받는데, 이 함수는 스토어에 저장되어 있던 값을 가지고 계산해서 새로운 값으로 변경하는 역할을 합니다. 그리고 이 함수는 'stop' 함수를 반환해야 하는데, 이 stop 함수는 해당 스토어의 구독자가 1에서 0으로 바뀔 때(즉 구독자가 하나도 없어질 때) 호출되게 됩니다.
 
 ```js
 /// file: store.js
