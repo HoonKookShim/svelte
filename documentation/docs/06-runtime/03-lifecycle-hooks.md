@@ -7,7 +7,7 @@ title: Lifecycle hooks
 - beforeUpdate/afterUpdate with deprecation notice?
 - or skip this entirely and only have it in the reference docs? -->
 
-In Svelte 5, the component lifecycle consists of only two parts: Its creation and its destruction. Everything in-between — when certain state is updated — is not related to the component as a whole; only the parts that need to react to the state change are notified. This is because under the hood the smallest unit of change is actually not a component, it's the (render) effects that the component sets up upon component initialization. Consequently, there's no such thing as a "before update"/"after update" hook.
+스벨트 5에서는, 컴포넌트의 인생주기는 단 2부분으로 구성됩니다: 생성될 때, 그리고 없어질 때. 그 중간에 있는 모든 것들은 — 어떤 상태가 언제 업데이트되는지 — 전체적으로 봤을 때 컴포넌트와 연관되지 않습니다.; only the parts that need to react to the state change are notified. This is because under the hood the smallest unit of change is actually not a component, it's the (render) effects that the component sets up upon component initialization. 결론적으로, "before update"나 "after update" 후크 같은 것들은 존재하지 않습니다.
 
 ## `onMount`
 
@@ -47,7 +47,7 @@ If a function is returned from `onMount`, it will be called when the component i
 
 > EXPORT_SNIPPET: svelte#onDestroy
 
-Schedules a callback to run immediately before the component is unmounted.
+컴포넌트가 언마운트 되기 직전에 실행될 콜백 함수들을 등록합니다.
 
 Out of `onMount`, `beforeUpdate`, `afterUpdate` and `onDestroy`, this is the only one that runs inside a server-side component.
 
