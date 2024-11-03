@@ -177,20 +177,21 @@ The expression will be stringified and escaped to prevent code injections. If yo
 
 ## Comments
 
-You can use HTML comments inside components.
+컴포넌트 안에 HTML 주석을 사용할 수 있습니다.
 
 ```svelte
 <!-- this is a comment! --><h1>Hello world</h1>
 ```
 
-Comments beginning with `svelte-ignore` disable warnings for the next block of markup. Usually, these are accessibility warnings; make sure that you're disabling them for a good reason.
+`svelte-ignore`로 시작하는 주석은 다음 마크업 블록에서 발생하는 경고를 disable합니다.
+보통, 접근성 경고입니다/warnings for the next block of markup. Usually, these are accessibility warnings; make sure that you're disabling them for a good reason.
 
 ```svelte
 <!-- svelte-ignore a11y-autofocus -->
 <input bind:value={name} autofocus />
 ```
 
-You can add a special comment starting with `@component` that will show up when hovering over the component name in other files.
+`@component`로 시작하는 특수 주석을 추가하면, 다른 파일들에서 해당 컴포넌트 위에서 마우스 커서가 호버링할 때 그 주석을 보여줍니다.
 
 ````svelte
 <!--
