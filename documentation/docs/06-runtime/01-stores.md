@@ -6,15 +6,16 @@ title: Stores
 - how to write
 - TODO should the details for the store methods belong to the reference section? -->
 
-A _store_ is an object that allows reactive access to a value via a simple _store contract_. The [`svelte/store` module](../svelte-store) contains minimal store implementations which fulfil this contract.
+_store_ 는 하나의 객체로, 하나의 값에 대해서 간단한 _store contract_ 를 통해서 반응적인 접근을 가능하게 합니다.
+[`svelte/store` module](../svelte-store) 모듈에는 이 컨트랙트를 충족시키는 최소한의 스토어들이 구현되어 포함하고 있습니다..
 
-Any time you have a reference to a store, you can access its value inside a component by prefixing it with the `$` character. This causes Svelte to declare the prefixed variable, subscribe to the store at component initialisation and unsubscribe when appropriate.
+스토어를 가르키는 변수만 가지고 있다면, 그 변수 이름 앞에 `$` 문자를 붙여서 컴포넌트 안에서 그 값에 접근할 수 있습니다. 이렇게 하면 스벨트는 컴포넌트를 초기화할 때 `$`를 붙인 변수를 선언해서 스토어에 subscribe하고, 적절한 때에 unsubscribe 합니다.
 
-Assignments to `$`-prefixed variables require that the variable be a writable store, and will result in a call to the store's `.set` method.
+`$`가 앞에 붙은 변수에 값을 할당하려면 그 변수는 writable 스토어여야 하고, 스토어의 `.set` 메소드를 호출하게 됩니다.
 
-Note that the store must be declared at the top level of the component — not inside an `if` block or a function, for example.
+스토어는 컴포넌트의 최상위에 선언되어야 한다는 점에 주의하세요. 예를 들어 `if` 블록이나 함수 안에 선언되어서는 안 됩니다.
 
-Local variables (that do not represent store values) must _not_ have a `$` prefix.
+지역 변수들 (스토어 값을 나타내지 않는 변수들) 이름 앞에는 `$`가 붙으면 _절대로_ 안 됩니다.
 
 ```svelte
 <script>
@@ -33,10 +34,10 @@ Local variables (that do not represent store values) must _not_ have a `$` prefi
 
 ## When to use stores
 
-Prior to Svelte 5, stores were the go-to solution for creating cross-component reactive states or extracting logic. With runes, these use cases have greatly diminished.
+Svelte 5 이전에는, 스토어는 여러 컴포넌트 사이에 반응성을 생성하기 위한 go-to 솔루션, 또는 extracting logic. 룬이 도입되면서, 이런 용도로 스토어를 사용하는 경우는 매우 줄어들었습니다.
 
 - when extracting logic, it's better to take advantage of runes' universal reactivity: You can use runes outside the top level of components and even place them into JavaScript or TypeScript files (using a `.svelte.js` or `.svelte.ts` file ending)
-- when creating shared state, you can create a `$state` object containing the values you need and then manipulate said state
+- 컴포넌트 간에 상태를 공유하고 싶을 때는, 그 값을 포함하는 `$state` 객체를 만들고 적용하면 됩니다. object containing the values you need and then manipulate said state
 
 Stores are still a good solution when you have complex asynchronous data streams or it's important to have more manual control over updating values or listening to changes. If you're familiar with RxJs and want to reuse that knowledge, the `$` also comes in handy for you.
 
