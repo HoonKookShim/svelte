@@ -1,5 +1,5 @@
 ---
-title: {#await ...}
+title: \{#await ...}
 ---
 
 ```svelte
