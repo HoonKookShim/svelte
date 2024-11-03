@@ -2,11 +2,12 @@
 title: Basic markup
 ---
 
-Markup inside a Svelte component can be thought of as HTML++.
+스벨트 컴포넌트 안의 마크업은 일종의 HTML++로 생각할 수 있습니다.
 
 ## Tags
 
-A lowercase tag, like `<div>`, denotes a regular HTML element. A capitalised tag or a tag that uses dot notation, such as `<Widget>` or `<my.stuff>`, indicates a _component_.
+소문자 태그, 예를 들면`<div>`는 정규 HTML 요소를 나타냅니다.
+대문자로 시작하는 태그나 점표기법(dot notation)을 사용한 태그, 예를 들면 `<Widget>` 이나 `<my.stuff>`는 _컴포넌트_ 를 나타냅니다.
 
 ```svelte
 <script>
@@ -18,9 +19,9 @@ A lowercase tag, like `<div>`, denotes a regular HTML element. A capitalised tag
 </div>
 ```
 
-## Element attributes
+## 요소의 속성들
 
-By default, attributes work exactly like their HTML counterparts.
+기본적으로, 속성들은 그들의 원래 HTML 문법과 완전히 비슷하게 작동합니다.
 
 ```svelte
 <div class="foo">
@@ -28,28 +29,28 @@ By default, attributes work exactly like their HTML counterparts.
 </div>
 ```
 
-As in HTML, values may be unquoted.
+HTML에서와 동일하게, 값을 표시할 때는 따옴표를 생략할 수 있습니다.
 
 <!-- prettier-ignore -->
 ```svelte
 <input type=checkbox />
 ```
 
-Attribute values can contain JavaScript expressions.
+속성값에는 자바스크립트 표혁식이 포함될 수 있습니다.
 
 ```svelte
 <a href="page/{p}">page {p}</a>
 ```
 
-Or they can _be_ JavaScript expressions.
+또는 속성값 자체가 자바스크립트 표현식이 될 수도 있습니다.
 
 ```svelte
 <button disabled={!clickable}>...</button>
 ```
 
-Boolean attributes are included on the element if their value is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) and excluded if it's [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy).
+불른 값이 주어진 속성들은, 값이 [참](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)일 때 요소에 포함되며, 값이 [거짓](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
 
-All other attributes are included unless their value is [nullish](https://developer.mozilla.org/en-US/docs/Glossary/Nullish) (`null` or `undefined`).
+그 값이 [널유사값(nullish)](https://developer.mozilla.org/en-US/docs/Glossary/Nullish)(`null` 또는 `undefined`)이 아닌 다른 모든 속성들은 포함됩니다.
 
 ```svelte
 <input required={false} placeholder="This input field is not required" />
@@ -63,7 +64,7 @@ All other attributes are included unless their value is [nullish](https://develo
 > <button disabled="{number !== 42}">...</button>
 > ```
 
-When the attribute name and value match (`name={name}`), they can be replaced with `{name}`.
+속성의 이름과 그 값이 일치하는 경우에는(`name={name}`), 간단하게 `{name}`으로 줄일 수 있습니다.
 
 ```svelte
 <button {disabled}>...</button>
@@ -74,7 +75,7 @@ When the attribute name and value match (`name={name}`), they can be replaced wi
 
 ## Component props
 
-By convention, values passed to components are referred to as _properties_ or _props_ rather than _attributes_, which are a feature of the DOM.
+정의에 의하면, 컴포넌트에 전달된 값들은 _속성_ 보다는 _프로퍼티_ 또는 _prop_ 라고 부르며, 그들은 DOM의 일부입니다.
 
 As with elements, `name={name}` can be replaced with the `{name}` shorthand.
 
