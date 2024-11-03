@@ -2,9 +2,10 @@
 title: bind:
 ---
 
-Data ordinarily flows down, from parent to child. The `bind:` directive allows data to flow the other way, from child to parent.
+데이터는 보통 아래로 흘러 내려갑니다. 부모 요소에서 자식 요소로 방향으로. `bind:` 지시어를 사용하면 반대 방향, 자식  요소에서 부모 요소로 흐르게 합니다.
 
-The general syntax is `bind:property={expression}`, where `expression` is an _lvalue_ (i.e. a variable or an object property). When the expression is an identifier with the same name as the property, we can omit the expression — in other words these are equivalent:
+일반적인 문법은 `bind:property={expression}`입니다. `expression` 은 _lvalue_ (i.e. a variable or an object property)입니다. 표현식이 프로퍼티의 이름과 같다면, 표현식을 생략할 수 있습니다. — 다른 말로 하자면, 이 둘은 동일한 효과를 가집니다.:
+
 
 <!-- prettier-ignore -->
 ```svelte
