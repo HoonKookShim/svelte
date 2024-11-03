@@ -2,7 +2,7 @@
 title: $props
 ---
 
-The inputs to a component are referred to as _props_, which is short for _properties_. You pass props to components just like you pass attributes to elements:
+컴포넌트에 대한 입력을 _props_ 라고 하는데, 이것은 _properties_ 를 줄여서 말하는 것입니다. 요소에 속성을 전달하는 것과 똑같은 방식으로 컴포넌트에 prop을 전달합니다.:
 
 ```svelte
 <!--- file: App.svelte --->
@@ -13,7 +13,7 @@ The inputs to a component are referred to as _props_, which is short for _proper
 <MyComponent adjective="cool" />
 ```
 
-On the other side, inside `MyComponent.svelte`, we can receive props with the `$props` rune...
+반대편에서는, 즉 `MyComponent.svelte`파일 안에서는, props를 `$props` 룬 문법으로 전달받을 수 있습니다...
 
 ```svelte
 <!--- file: MyComponent.svelte --->
@@ -24,7 +24,7 @@ On the other side, inside `MyComponent.svelte`, we can receive props with the `$
 <p>this component is {props.adjective}</p>
 ```
 
-...though more commonly, you'll [_destructure_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) your props:
+...더 흔히 쓰는 방법은, 전달받은 prop을 [_구조분해_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) 하는 것입니다.:
 
 ```svelte
 <!--- file: MyComponent.svelte --->
@@ -37,13 +37,13 @@ On the other side, inside `MyComponent.svelte`, we can receive props with the `$
 
 ## Fallback values
 
-Destructuring allows us to declare fallback values, which are used if the parent component does not set a given prop:
+구조분해를 하면, 부모 컴포넌트가 특정 prop 대한 값을 전달하지 않았을 때 사용할 기본값을 설정할 수 있습니다.
 
 ```js
 let { adjective = 'happy' } = $props();
 ```
 
-> [!NOTE] Fallback values are not turned into reactive state proxies (see [Updating props](#Updating-props) for more info)
+> [!NOTE] 기본값은 반응성 상태 프록시로 변환되지 않습니다. (더 자세한 내용은 [Updating props](#Updating-props)을 참조하세요.
 
 ## Renaming props
 
@@ -55,7 +55,7 @@ let { super: trouper = 'lights are gonna find me' } = $props();
 
 ## Rest props
 
-Finally, we can use a _rest property_ to get, well, the rest of the props:
+마지막으로, _나머지 프로퍼티_ 를 사용해서, 나머지 props들을 받아올 수 있습니다.:
 
 ```js
 let { a, b, c, ...others } = $props();
