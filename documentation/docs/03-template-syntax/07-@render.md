@@ -1,8 +1,8 @@
 ---
-title: {@render ...}
+title: '{@render ...}'
 ---
 
-To render a [snippet](snippet), use a `{@render ...}` tag.
+[snippet](snippet)을 렌더링하려면, `{@render ...}` 태그를 사용한다.
 
 ```svelte
 {#snippet sum(a, b)}
@@ -14,7 +14,7 @@ To render a [snippet](snippet), use a `{@render ...}` tag.
 {@render sum(5, 6)}
 ```
 
-The expression can be an identifier like `sum`, or an arbitrary JavaScript expression:
+표현식은 The expression can be an identifier like `sum`, 아니면 임의의 자바스크립트 표현식이 될 수도 있다.or an arbitrary JavaScript expression:
 
 ```svelte
 {@render (cool ? coolSnippet : lameSnippet)()}
